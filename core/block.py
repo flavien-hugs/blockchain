@@ -1,6 +1,7 @@
 # blockchain block
 
-import hashlib, datetime
+import hashlib
+import datetime
 
 
 class Block:
@@ -16,21 +17,14 @@ class Block:
 
     @staticmethod
     def create_origin_block():
-        """
-        origin block 
-        """
+        """origin block """
         return Block("0", "0", datetime.datetime.now())
 
     def get_hash(self):
-        """
-        get first hash function
-        """
+        """get first hash function"""
         header_bin = (
-            str(self.previous_block_hash) + 
-            str(self.data) +
-            str(self.timestamp)
+            str(self.previous_block_hash) + str(self.data) + str(self.timestamp)
         ).encode()
         inner_hash = hashlib.sha256(header_bin).hexdigest().encode()
         outer_hash = hashlib.sha256(inner_hash).hexdigest()
         return outer_hash
-        
